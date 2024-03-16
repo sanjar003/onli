@@ -8,6 +8,7 @@ function App() {
     <>
       <Provider store={store}>
         <MainRoutes />
+        
       </Provider>
     </>
   );

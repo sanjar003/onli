@@ -68,6 +68,7 @@ const LoginForm: React.FC = () => {
       <Link to="/registration">Нет аккаунт, зарегистрируйтесь </Link>
       <div>
         <Button {...loginButtonProps}>Войти</Button>
+        
       </div>
     </form>
   );
