@@ -4,8 +4,8 @@ import Input from "../../customInput/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../customButton/CustomButton";
 import { useLoginMutation } from "../../../redux/api/loginApi";
-import { useFormik } from "formik";
-import * as Yup from 'yup'
+import {  useFormik } from "formik";
+import { loginShema } from "../../../utils/validations/loginValidations";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -18,16 +18,13 @@ const LoginForm: React.FC = () => {
     width: "300px",
   };
 
-
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: Yup.object({
-      email:Yup.string().email('Не корректный email').required('Обезательное поле'),
-      password: Yup.string().required('Oбезательное поле')
-    }),
+    
+    validationSchema:loginShema,
     onSubmit: async (values) => {
       const result = await login({
         email: values.email,
@@ -41,6 +38,7 @@ const LoginForm: React.FC = () => {
       }
     },
   });
+  console.log(formik, 'formil');
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -53,7 +51,9 @@ const LoginForm: React.FC = () => {
         onChange={formik.handleChange}
         placeholder="Введите собшения"
         width="300px"
+        onBlur={formik.handleBlur}
       />
+      {formik.touched.email && formik.errors.email ? (<div style={{color:'red'}}>{formik.errors.email}</div>) :  null}
       <Input
         id="password"
         type="password"
@@ -62,7 +62,10 @@ const LoginForm: React.FC = () => {
         onChange={formik.handleChange}
         placeholder="Введите пароль"
         width="300px"
+        onBlur={formik.handleBlur}
       />
+            {formik.touched.password && formik.errors.password ? (<div style={{color:'red'}}>{formik.errors.password}</div>) :  null}
+
       <Link to="/registration">Нет аккаунт, зарегистрируйтесь </Link>
       <div>
         <Button {...loginButtonProps}>Войти</Button>
