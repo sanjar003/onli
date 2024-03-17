@@ -23,11 +23,11 @@ const RegistrationForm: React.FC = () => {
     setUserName(value);
   };
 
-  //   const loginInputProps : InputProps={
-  //     type: 'email',
-  //     label:'Email',
+    // const loginInputProps : InputProps={
+    //   type: 'email',
+    //   label:'Email',
 
-  //   }
+    // }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
