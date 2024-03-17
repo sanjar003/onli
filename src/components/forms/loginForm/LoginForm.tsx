@@ -1,30 +1,15 @@
 import React from "react";
-// import Input, {InputProps} from "../../customInput/CustomInput";
 import Input from "../../customInput/CustomInput";
 
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../customButton/CustomButton";
 import { useLoginMutation } from "../../../redux/api/loginApi";
 import { useFormik } from "formik";
+import * as Yup from 'yup'
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const handleGetEmail = (value: string) => {
-  //   setEmail(value);
-  // };
-  // const handleGetPassword = (value: string) => {
-  //   setPassword(value);
-  // };
-
-  //   const loginInputProps : InputProps={
-  //     type: 'email',
-  //     label:'Email',
-
-  //   }
 
   const loginButtonProps: ButtonProps = {
     type: "submit",
@@ -33,26 +18,16 @@ const LoginForm: React.FC = () => {
     width: "300px",
   };
 
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const result = await login({ email, password });
-  //   if ("data" in result) {
-  //     const { token } = result.data;
-  //     localStorage.setItem("token", token);
-  //     localStorage.setItem("isAuth", "true");
-  //     setEmail("");
-  //     setPassword("");
-  //     navigate("/");
-
-  //   }
-  // };
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-
+    validationSchema: Yup.object({
+      email:Yup.string().email('Не корректный email').required('Обезательное поле'),
+      password: Yup.string().required('Oбезательное поле')
+    }),
     onSubmit: async (values) => {
       const result = await login({
         email: values.email,
