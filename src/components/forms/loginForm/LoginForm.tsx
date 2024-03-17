@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../customButton/CustomButton";
 import { useLoginMutation } from "../../../redux/api/loginApi";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -52,17 +53,24 @@ const LoginForm: React.FC = () => {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Не корректный email")
+        .required("Обезательное поле"),
+      password: Yup.string().required("Обезательное поле"),
+    }),
     onSubmit: async (values) => {
-        const result = await login({email: values.email, password:values.password});
-        if ("data" in result) {
-          const { token } = result.data;
-          localStorage.setItem("token", token);
-          localStorage.setItem("isAuth", "true");
-          navigate("/");
-    
-        }
+      const result = await login({
+        email: values.email,
+        password: values.password,
+      });
+      if ("data" in result) {
+        const { token } = result.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("isAuth", "true");
+        navigate("/");
       }
-    
+    },
   });
 
   return (
