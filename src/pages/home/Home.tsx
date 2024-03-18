@@ -6,9 +6,7 @@ interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
   const navigate = useNavigate();
-  const { data } = useGetProductsQuery;
-
-  console.log(data);
+  const { data: products = [] } = useGetProductsQuery();
 
   useEffect(() => {
     const isAuth = localStorage.getItem("isAuth");
@@ -16,7 +14,17 @@ const Home: React.FC<HomeProps> = () => {
       navigate("login");
     }
   }, [navigate]);
-  return <div>Home</div>;
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("isAuth");
+    navigate("/login");
+  };
+  return <div>
+    {products.map((el:any) => {
+      return <div>{el.productName}</div>
+    })}
+    <button onClick={logout}>Выйти</button>
+  </div>;
 };
 export default Home;
-  
