@@ -1,41 +1,40 @@
-import { useState } from "react";
+// import { useState } from "react";
 // import Input, {InputProps} from "../../customInput/CustomInput";
-import Input from "../../customInput/CustomInput";
+// import Input from "../../customInput/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../customButton/CustomButton";
 import { useCreateUsersMutation } from "../../../redux/api/usersApi";
+import { Field, Form, Formik } from "formik";
+import { registrationShema } from "../../../utils/validations/resigtrationValidation";
 
 const RegistrationForm: React.FC = () => {
   const navigate = useNavigate();
   const [createUser] = useCreateUsersMutation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userName, setUserName] = useState("");
+  //  const [email, setEmail] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [userName, setUserName] = useState("");
 
-  const handleGetEmail = (value: string) => {
-    setEmail(value);
-  };
-  const handleGetPassword = (value: string) => {
-    setPassword(value);
-  };
+  // const handleGetEmail = (value: string) => {
+  //   setEmail(value);
+  // };
+  // const handleGetPassword = (value: string) => {
+  //   setPassword(value);
+  // };
 
-  const handleGetUserName = (value: string) => {
-    setUserName(value);
-  };
+  // const handleGetUserName = (value: string) => {
+  //   setUserName(value);
+  // };
 
-    // const loginInputProps : InputProps={
-    //   type: 'email',
-    //   label:'Email',
+  // const loginInputProps : InputProps={
+  //   type: 'email',
+  //   label:'Email',
 
-    // }
+  // }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (velues: any) => {
+    const { email, userName, password } = velues;
     const result = await createUser({ email, password, userName });
     if (result) {
-      setEmail("");
-      setPassword("");
-      setUserName("");
       navigate("/login");
     }
   };
@@ -48,37 +47,36 @@ const RegistrationForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Регистрация</h3>
-      <Input
-        type="email"
-        label="Email"
-        value={email}
-        onChange={handleGetEmail}
-        placeholder="Введите собшения"
-        width="300px"
-      />
-      <Input
-        type="password"
-        label="Password"
-        value={password}
-        onChange={handleGetPassword}
-        placeholder="Введите пароль"
-        width="300px"
-      />
-      <Input
-        type="text"
-        label="Имя пользвателья"
-        value={userName}
-        onChange={handleGetUserName}
-        placeholder="Имя пользвателья"
-        width="300px"
-      />
-      <Link to="/login">У меня ксть аккаунт, войти </Link>
-      <div>
+    <Formik
+      initialValues={{ email: "", userName: "", password: "" }}
+      onSubmit={handleSubmit}
+      validationSchema={registrationShema}
+    >
+      <Form style={{display: "flex", flexDirection: 'column'}}>
+        <label htmlFor="email">Email</label>
+        <Field id="email" name="email" type="email" placeholder="email" />
+
+        <label htmlFor="userName">userNAme</label>
+        <Field
+          id="userName"
+          name="userName"
+          type="userName"
+          placeholder="IMA"
+        />
+
+        <label htmlFor="password">parol</label>
+        <Field
+          id="password"
+          name="password"
+          type="password"
+          placeholder="parol"
+        />
+        <Link to="/login">У меня ксть аккаунт, войти </Link>
+
         <Button {...loginButtonProps}>Зарегистрироваться</Button>
-      </div>
-    </form>
+      </Form>
+    </Formik>
+   
   );
 };
 export default RegistrationForm;
