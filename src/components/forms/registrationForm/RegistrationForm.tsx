@@ -52,31 +52,41 @@ const RegistrationForm: React.FC = () => {
       onSubmit={handleSubmit}
       validationSchema={registrationShema}
     >
-      <Form style={{display: "flex", flexDirection: 'column'}}>
-        <label htmlFor="email">Email</label>
-        <Field id="email" name="email" type="email" placeholder="email" />
+      {({ errors, touched }) => {
+        return (
+          <Form style={{ display: "flex", flexDirection: "column" }}>
+            <label htmlFor="email">Email</label>
+            <Field id="email" name="email" type="email" placeholder="email" />
+            {touched.email && errors.email ? (
+              <div style={{ color: "red" }}>{errors.email}</div>
+            ) : null}
+            <label htmlFor="userName">userNAme</label>
+            <Field
+              id="userName"
+              name="userName"
+              type="userName"
+              placeholder="IMA"
+            />
+            {touched.userName && errors.userName ? (
+              <div style={{ color: "red" }}>{errors.userName}</div>
+            ) : null}
+            <label htmlFor="password">parol</label>
+            <Field
+              id="password"
+              name="password"
+              type="password"
+              placeholder="parol"
+            />
+              {touched.password && errors.password ? (
+              <div style={{ color: "red" }}>{errors.password}</div>
+            ) : null}
+            <Link to="/login">У меня ксть аккаунт, войти </Link>
 
-        <label htmlFor="userName">userNAme</label>
-        <Field
-          id="userName"
-          name="userName"
-          type="userName"
-          placeholder="IMA"
-        />
-
-        <label htmlFor="password">parol</label>
-        <Field
-          id="password"
-          name="password"
-          type="password"
-          placeholder="parol"
-        />
-        <Link to="/login">У меня ксть аккаунт, войти </Link>
-
-        <Button {...loginButtonProps}>Зарегистрироваться</Button>
-      </Form>
+            <Button {...loginButtonProps}>Зарегистрироваться</Button>
+          </Form>
+        );
+      }}
     </Formik>
-   
   );
 };
 export default RegistrationForm;
