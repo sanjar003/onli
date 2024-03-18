@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import ReactDOM  from "react-dom";
+import styles from './Modal.module.css'
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,9 +10,9 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
   return ReactDOM.createPortal(
-    <div>
-      <div>
-        <button onClick={onClose}>закрыть</button>
+    <div className={styles.modalOverLay}>
+      <div className={styles.modal}>
+        <button className={styles.modalClose} onClick={onClose}>закрыть</button>
         {children}
       </div>
     </div>,
