@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { REQUEST_URL } from "../../utils/constants/constants";
 
 interface Users {
-  ud: number;
+  id: number;
   email: string;
 }
 interface CreateUserRequest {
