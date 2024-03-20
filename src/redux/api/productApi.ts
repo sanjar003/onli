@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { REQUEST_URL } from "../../utils/constants/constants";
 
-interface ProductRequest{
-  name:string;
-  photoUrl:string;
-  price:string;
-  quantity:string;
+interface ProductRequest {
+  name: string;
+  photoUrl: string;
+  price: string;
+  quantity: string;
 }
 
 interface ProductsResponse {
-  id: number;
+  _id: number;
   name: string;
   photoUrl: string;
   price: string;
@@ -27,16 +27,15 @@ export const productsApi = createApi({
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
       }),
-        createUsers: builder.mutation<ProductsResponse, ProductRequest>({
-          query: (body) => ({ 
-            url: "users",
-            method: "POST",
-            body,
-            headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}
-          }),
+      createProduct: builder.mutation<ProductsResponse, ProductRequest>({
+        query: (body) => ({
+          url: "products",
+          method: "POST",
+          body,
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
+      }),
     };
   },
 });
-export const { useGetProductsQuery, useCreateUsersMutation } = productsApi;
-// useGetProductsQuery
+export const { useGetProductsQuery, useCreateProductMutation } = productsApi;
