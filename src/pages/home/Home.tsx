@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../redux/api/productApi";
 import Modal from "../../components/forms/modal/Modal";
+import ProductForm from "../../components/forms/addProductFrom/AddProductForm";
 
 interface HomeProps {}
 
@@ -34,7 +35,7 @@ const Home: React.FC<HomeProps> = () => {
       <button onClick={logout}>Выйти</button>
       <button onClick={handleModal}>Открыть модал</button>
       <Modal isOpen={isOpen} onClose={handleModal}>
-        hello my friend
+      <ProductForm/>
       </Modal>
     </div>
   );
