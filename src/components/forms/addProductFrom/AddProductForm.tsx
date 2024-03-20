@@ -1,8 +1,8 @@
 import React from "react";
-import { useCreateUsersMutation } from "../../../redux/api/usersApi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../customInput/CustomInput";
+import { useCreateProductMutation } from "../../../redux/api/productApi";
 
 interface FormValues {
   productName: string;
@@ -12,7 +12,7 @@ interface FormValues {
 }
 
 const ProductForm: React.FC = () => {
-  const [createProduct] = useCreateUsersMutation();
+  const [createProduct] = useCreateProductMutation();
 
   const formik = useFormik<FormValues>({
     initialValues: {
