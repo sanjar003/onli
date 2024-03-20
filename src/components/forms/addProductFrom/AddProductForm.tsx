@@ -10,8 +10,11 @@ interface FormValues {
   price: number;
   photoUrl: string;
 }
+interface ProductFormProps{
+  handleModal: () => void
+}
 
-const ProductForm: React.FC = () => {
+const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
   const [createProduct] = useCreateProductMutation();
 
   const formik = useFormik<FormValues>({
@@ -30,6 +33,7 @@ const ProductForm: React.FC = () => {
     onSubmit: async (values: any) => {
       try {
         await createProduct(values);
+        handleModal() 
       } catch (error) {
         console.error(error);
       }
