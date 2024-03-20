@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = () => {
       <button onClick={logout}>Выйти</button>
       <button onClick={handleModal}>Открыть модал</button>
       <Modal isOpen={isOpen} onClose={handleModal}>
-      <ProductForm/>
+      <ProductForm handleModal={handleModal}/>
       </Modal>
     </div>
   );
