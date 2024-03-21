@@ -25,10 +25,10 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
       photoUrl: "" 
     },
     validationSchema: Yup.object({
-      productName: Yup.string().required(""),
-      quantity: Yup.number().required("").positive(""),
-      price: Yup.number().required("").positive(""),
-      photoUrl: Yup.string().required("").url(""),
+      productName: Yup.string().required("Обизательно поле"),
+      quantity: Yup.number().required("Обизательно поле").positive("Должна быть положительным числом"),
+      price: Yup.number().required("Обизательно поле").positive("Должна быть положительным числом"),
+      photoUrl: Yup.string().required("Обизательно поле").url(""),
     }),
     onSubmit: async (values: any) => {
       try {
