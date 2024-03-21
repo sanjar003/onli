@@ -30,7 +30,7 @@ const Home: React.FC<HomeProps> = () => {
   return (
     <div>
       {products.map((el: any) => {
-        return <div>{el.productName}</div>;
+        return <div style={{width:'500px', height:'500px', background:'green'}}>{el.productName}</div>;
       })}
       <button onClick={logout}>Выйти</button>
       <button onClick={handleModal}>Открыть модал</button>

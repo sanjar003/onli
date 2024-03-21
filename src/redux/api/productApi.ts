@@ -19,6 +19,7 @@ interface ProductsResponse {
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({ baseUrl: REQUEST_URL }),
+  tagTypes: ["Products"],
   endpoints: (builder) => {
     return {
       getProducts: builder.query<ProductsResponse[], void>({
@@ -26,6 +27,7 @@ export const productsApi = createApi({
           url: "products",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
+        providesTags: ["Products"],
       }),
       createProduct: builder.mutation<ProductsResponse, ProductRequest>({
         query: (body) => ({
@@ -34,6 +36,7 @@ export const productsApi = createApi({
           body,
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
+        invalidatesTags :['Products']
       }),
     };
   },
