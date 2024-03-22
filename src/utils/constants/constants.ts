@@ -1,1 +1,1 @@
-export const REQUEST_URL="https://brand-store.up.railway.app"
+export const REQUEST_URL="https://online-store.up.railway.app"

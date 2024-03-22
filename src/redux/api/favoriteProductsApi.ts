@@ -24,15 +24,15 @@ export const favoriteProductsApi = createApi({
     return {
       getFavoiteProducts: builder.query<ProductsResponse[], void>({
         query: () => ({
-          url: "favorite-products",
+          url: "favorites-products",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
-        providesTags: ["FavoriteProducts"],
+        providesTags: ["FavoriteProducts"], 
       }),
-      toglleFavoriteProduct: builder.mutation<ProductsResponse, ProductRequest>({
+      toggleFavoriteProduct: builder.mutation<ProductsResponse, ProductRequest>({
         query: (id) => ({
-          url:` favorite-products/${id}`,
-          method: "PATCH",
+          url:`favorites-products/${id}`,
+          method: "POST",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }),
         invalidatesTags: ["FavoriteProducts"],
@@ -40,4 +40,4 @@ export const favoriteProductsApi = createApi({
     };
   },
 });
-export const { useGetFavoiteProductsQuery, useToglleFavoriteProductMutation } = favoriteProductsApi;
+export const { useGetFavoiteProductsQuery, useToggleFavoriteProductMutation } = favoriteProductsApi;
