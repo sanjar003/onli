@@ -1,35 +1,13 @@
-// import { useState } from "react";
-// import Input, {InputProps} from "../../customInput/CustomInput";
-// import Input from "../../customInput/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button, { ButtonProps } from "../../customButton/CustomButton";
 import { useCreateUsersMutation } from "../../../redux/api/usersApi";
 import { Field, Form, Formik } from "formik";
 import { registrationShema } from "../../../utils/validations/resigtrationValidation";
+import "./Registration.css";
 
 const RegistrationForm: React.FC = () => {
   const navigate = useNavigate();
   const [createUser] = useCreateUsersMutation();
-  //  const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [userName, setUserName] = useState("");
-
-  // const handleGetEmail = (value: string) => {
-  //   setEmail(value);
-  // };
-  // const handleGetPassword = (value: string) => {
-  //   setPassword(value);
-  // };
-
-  // const handleGetUserName = (value: string) => {
-  //   setUserName(value);
-  // };
-
-  // const loginInputProps : InputProps={
-  //   type: 'email',
-  //   label:'Email',
-
-  // }
 
   const handleSubmit = async (velues: any) => {
     const { email, userName, password } = velues;
@@ -56,12 +34,19 @@ const RegistrationForm: React.FC = () => {
         return (
           <Form style={{ display: "flex", flexDirection: "column" }}>
             <label htmlFor="email">Email</label>
-            <Field id="email" name="email" type="email" placeholder="email" />
+            <Field
+              className="input"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="email"
+            />
             {touched.email && errors.email ? (
               <div style={{ color: "red" }}>{errors.email}</div>
             ) : null}
             <label htmlFor="userName">userNAme</label>
             <Field
+              className="input"
               id="userName"
               name="userName"
               type="userName"
@@ -72,12 +57,13 @@ const RegistrationForm: React.FC = () => {
             ) : null}
             <label htmlFor="password">parol</label>
             <Field
+              className="input"
               id="password"
               name="password"
               type="password"
               placeholder="parol"
             />
-              {touched.password && errors.password ? (
+            {touched.password && errors.password ? (
               <div style={{ color: "red" }}>{errors.password}</div>
             ) : null}
             <Link to="/login">У меня ксть аккаунт, войти </Link>
