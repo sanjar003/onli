@@ -31,7 +31,7 @@ export const productsApi = createApi({
       }),
       createProduct: builder.mutation<ProductsResponse, ProductRequest>({
         query: (body) => ({
-          url: "products",
+          url: "products",           
           method: "POST",
           body,
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

@@ -26,6 +26,8 @@ const LoginForm: React.FC = () => {
     
     validationSchema:loginShema,
     onSubmit: async (values) => {
+      console.log(values);
+      
       const result = await login({
         email: values.email,
         password: values.password,
