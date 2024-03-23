@@ -31,6 +31,8 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
       photoUrl: Yup.string().required("Обизательно поле").url(""),
     }),
     onSubmit: async (values: any) => {
+      console.log(values);
+      
       try {
         await createProduct(values);
         handleModal() 
