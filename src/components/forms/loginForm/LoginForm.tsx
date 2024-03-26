@@ -40,7 +40,6 @@ const LoginForm: React.FC = () => {
       }
     },
   });
-  console.log(formik, 'formil');
 
   return (
     <form onSubmit={formik.handleSubmit}>
