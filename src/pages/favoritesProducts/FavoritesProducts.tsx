@@ -2,11 +2,11 @@ import React from "react";
 import { useGetFavoiteProductsQuery } from "../../redux/api/favoriteProductsApi";
 
 const FavoritesProducts: React.FC = () => {
-  const { data:products = [] } = useGetFavoiteProductsQuery();
+  const { data: products = [] } = useGetFavoiteProductsQuery();
   return (
     <div>
       {products.map((el: any) => {
-        const {productName} = el.product
+        const { productName } = el.product;
         return (
           <div
             style={{
