@@ -1,24 +1,23 @@
-.modalOverLay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(3px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.modalOverLay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal{
-    background-color: rgb(63, 62, 62);
-    padding: 20px;
-    border-radius: 5px;
-
+.modal {
+  background-color: rgb(63, 62, 62);
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .modalClose {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

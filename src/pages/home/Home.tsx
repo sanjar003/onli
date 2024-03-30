@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = () => {
               width: "500px",
               height: "500px",
               background: "green",
-              marginTop: "10px", 
+              marginTop: "10px",
             }}
           >
             <p> {el.productName}</p>
