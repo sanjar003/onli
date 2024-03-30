@@ -10,11 +10,11 @@ interface FormValues {
   price: number;
   photoUrl: string;
 }
-interface ProductFormProps{
-  handleModal: () => void
+interface ProductFormProps {
+  handleModal: () => void;
 }
 
-const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
+const ProductForm: React.FC<ProductFormProps> = ({ handleModal }) => {
   const [createProduct] = useCreateProductMutation();
 
   const formik = useFormik<FormValues>({
@@ -22,18 +22,22 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
       productName: "",
       quantity: 0,
       price: 0,
-      photoUrl: "" 
+      photoUrl: "",
     },
     validationSchema: Yup.object({
       productName: Yup.string().required("Обизательно поле"),
-      quantity: Yup.number().required("Обизательно поле").positive("Должна быть положительным числом"),
-      price: Yup.number().required("Обизательно поле").positive("Должна быть положительным числом"),
+      quantity: Yup.number()
+        .required("Обизательно поле")
+        .positive("Должна быть положительным числом"),
+      price: Yup.number()
+        .required("Обизательно поле")
+        .positive("Должна быть положительным числом"),
       photoUrl: Yup.string().required("Обизательно поле").url(""),
     }),
     onSubmit: async (values: any) => {
       try {
         await createProduct(values);
-        handleModal() 
+        handleModal();
       } catch (error) {
         console.error(error);
       }
@@ -69,7 +73,7 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
         {formik.touched.quantity && formik.errors.quantity && (
           <div style={{ color: "red" }}>{formik.errors.quantity}</div>
         )}
-         <Input
+        <Input
           type="number"
           label="Цена"
           name="price"
@@ -79,7 +83,7 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-          {formik.touched.price && formik.errors.price && (
+        {formik.touched.price && formik.errors.price && (
           <div style={{ color: "red" }}>{formik.errors.price}</div>
         )}
         <Input
@@ -92,7 +96,7 @@ const ProductForm: React.FC <ProductFormProps>= ({handleModal}) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-         {formik.touched.photoUrl && formik.errors.photoUrl && (
+        {formik.touched.photoUrl && formik.errors.photoUrl && (
           <div style={{ color: "red" }}>{formik.errors.photoUrl}</div>
         )}
         <button type="submit">Отправить</button>
